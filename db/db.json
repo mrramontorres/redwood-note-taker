@@ -1,0 +1,12 @@
+[
+    {
+        "noteTitle" : "Start Title",
+        "noteText" : "This is sample text",
+        "noteID" : "1"
+    },
+    {
+        "noteTitle" : "Natalia",
+        "noteText" : "123-456-7890",
+        "noteID" : "2"
+    }
+]
