@@ -1,7 +1,6 @@
 // Dependencies
 // =============================================================
 var express = require("express");
-var path = require("path");
 
 // Sets up the Express App
 // =============================================================
@@ -17,35 +16,14 @@ app.use(express.static(__dirname + "/public"));
 
 // Routes
 // =============================================================
+// The below points our server to a series of "route" files.
+// These routes give our server a "map" of how to respond when users visit or request data from various URLs.
 
-// Basic route that sends the user first to the AJAX Page
-app.get("/", function(req, res) {
-    // Sends users to welcome page
-    res.sendFile(path.join(__dirname, "index.html"));
-  });
-    // Sends users to notes page
-  app.get("/notes", function(req, res) {
-    res.sendFile(path.join(__dirname, "notes.html"));
-  });
-  
-  // Create New Note - takes in SOMETHING input
-  app.post("/api/notes", function(req, res) {
-    // req.body hosts is equal to the JSON post sent from the user
-    // This works because of our body parsing middleware
-    var newcharacter = req.body;
-  
-    console.log(newcharacter);
-  
-    // We then add the json the user sent to the character array
-    characters.push(newcharacter);
-  
-    // We then display the JSON to the users
-    res.json(newcharacter);
-  });
-  
-  // Starts the server to begin listening
-  // =============================================================
-  app.listen(PORT, function() {
-    console.log("App listening on PORT " + PORT);
-  });
-  
+require("./routes/apiRoutes")(app);
+require("./routes/htmlRoutes")(app);
+
+// Starts the server to begin listening
+// =============================================================
+app.listen(PORT, function() {
+  console.log("App listening on PORT " + PORT);
+});
