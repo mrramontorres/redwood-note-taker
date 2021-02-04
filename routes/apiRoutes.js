@@ -1,7 +1,13 @@
 // ===============================================================================
+// DEPENDENCIES
+// We need to include the fs package in order to read/write to the .json file.
+// ===============================================================================
+var fs = require("fs");
+
+// ===============================================================================
 // LOAD DATA
 // We are linking our routes to a series of "data" sources.
-// These data sources hold .json files.
+// This data source hold a .json file.
 // ===============================================================================
 
 var notesData = require("../db/db.json");
@@ -18,6 +24,7 @@ module.exports = function(app) {
   // ---------------------------------------------------------------------------
 
   app.get("/api/notes", function(req, res) {
+    console.log("app.get")
     res.json(notesData);
   });
 
@@ -41,5 +48,10 @@ module.exports = function(app) {
       notesData.push(req.body);
       res.json(false);
     }
+  })
+
+  app.delete("/api/notes/id", function(req, res){
+    console.log("delete")
+    res.json()
   })
 };
