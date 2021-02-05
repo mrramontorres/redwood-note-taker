@@ -1,6 +1,1 @@
-[
-    {
-        "title" : "Sample Title",
-        "text" : "This is sample text that begins your note taking adventure."
-    }
-]
+[{"id" : 0, "title" : "Sample Title", "text" : "This is sample text."}]

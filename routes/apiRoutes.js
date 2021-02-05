@@ -18,8 +18,6 @@ module.exports = function(app) {
   // ---------------------------------------------------------------------------
 
   app.get("/api/notes", function(req, res) {
-    console.log("app.delete");
-    console.log(notesData);
     res.json(notesData);
   });
 
@@ -35,24 +33,26 @@ module.exports = function(app) {
     // Our "server" will respond to requests and push the new note with specific ID.
     // It will do this by sending out the value "true" have a table
     // req.body is available since we're using the body parsing middleware
-    console.log("app.post");
+
     var id = notesData.length
     if (notesData.length) {
-
-      console.log("this is the note id ->" + id)
-
       notesData.push({id,...req.body});
       res.json(true);
-    }
-    else {
-      notesData.push(req.body);
-      res.json(false);
     }
   })
 
   // API DELETE Requests
   app.delete("/api/notes/:id", function(req, res){
     console.log("app.delete");
+    var x = req.params.id;
+    //console.log(x);
+    //console.log(req.params['id']);
+    //console.log(notesData.find(req.params['id'].title));
+    //console.log(notesData.splice(x => x.id === 'id'));
+    var removeNote = notesData.map(function(item) {
+      return item.id;
+    }).indexOf(x);
+    notesData.splice(removeNote, 1);
     res.end();
   })
 };
