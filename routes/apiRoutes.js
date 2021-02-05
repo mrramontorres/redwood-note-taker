@@ -4,13 +4,7 @@
 // ===============================================================================
 
 var fs = require("fs");
-
-// ===============================================================================
-// LOAD DATA
-// We are linking our routes to a "data" source, which is a .json file.
-// ===============================================================================
-
-var notesData = require("../db/db.json");
+notesData = require("../db/db.json");
 
 // ===============================================================================
 // ROUTING
@@ -24,24 +18,28 @@ module.exports = function(app) {
   // ---------------------------------------------------------------------------
 
   app.get("/api/notes", function(req, res) {
-    //notesData = "adding something here"
-    //console.log("app.get")
+    console.log("app.delete");
+    console.log(notesData);
     res.json(notesData);
   });
 
   // API POST Requests
-  // Below code handles when a user submits a form and thus submits data to the server.
-  // In each of the below cases, when a user submits form data (a JSON object)
-  // ...the JSON is pushed to the appropriate JavaScript array
-  // (ex. User fills out a reservation request... this data is then sent to the server...
-  // Then the server saves the data to the tableData array)
+  // Below code handles when a user submits data to the server.
+  // In each of the below cases, when a user submits form by clicking the save icon 
+  // ...data (a JSON object) is pushed to the appropriate file
+  // (ex. User fills title... this data is then sent to the server...
+  // Then the server saves the data to the json file)
   // ---------------------------------------------------------------------------
 
   app.post("/api/notes", function(req, res) {
-    // Note the code here. Our "server" will respond to requests and let users know if they have a table or not.
+    // Our "server" will respond to requests and let users know if they have a table or not.
     // It will do this by sending out the value "true" have a table
     // req.body is available since we're using the body parsing middleware
-    if (notesData.length < 5) {
+    
+    if (notesData.length) {
+      console.log("app.post");
+      console.log(notesData.length);
+      console.log(req.body);
       notesData.push(req.body);
       res.json(true);
     }
@@ -51,8 +49,9 @@ module.exports = function(app) {
     }
   })
 
+  // API DELETE Requests
   app.delete("/api/notes/:id", function(req, res){
-    console.log("delete?")
-    res.json()
+    console.log("app.delete");
+    res.end();
   })
 };

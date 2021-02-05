@@ -1,7 +1,6 @@
 [
     {
-        "noteTitle" : "Start Title",
-        "noteText" : "This is sample text",
-        "noteID" : "1"
+        "title" : "Sample Title",
+        "text" : "This is sample text that begins your note taking adventure."
     }
 ]
