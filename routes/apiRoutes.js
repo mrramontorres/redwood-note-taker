@@ -32,15 +32,16 @@ module.exports = function(app) {
   // ---------------------------------------------------------------------------
 
   app.post("/api/notes", function(req, res) {
-    // Our "server" will respond to requests and let users know if they have a table or not.
+    // Our "server" will respond to requests and push the new note with specific ID.
     // It will do this by sending out the value "true" have a table
     // req.body is available since we're using the body parsing middleware
-    
+    console.log("app.post");
+    var id = notesData.length
     if (notesData.length) {
-      console.log("app.post");
-      console.log(notesData.length);
-      console.log(req.body);
-      notesData.push(req.body);
+
+      console.log("this is the note id ->" + id)
+
+      notesData.push({id,...req.body});
       res.json(true);
     }
     else {
