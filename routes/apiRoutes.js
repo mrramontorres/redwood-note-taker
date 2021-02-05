@@ -34,24 +34,29 @@ module.exports = function(app) {
     // It will do this by sending out the value "true" have a table
     // req.body is available since we're using the body parsing middleware
 
-    var id = notesData.length
+    var num = Math.round(Math.random()*1000);
+    var id = notesData.length + num
     if (notesData.length) {
       notesData.push({id,...req.body});
       res.json(true);
+    } else {
+      id = 0
+      notesData.push({id,...req.body});
+      res.json(false);
     }
+    //console.log("this is the id ---> " + id);
   })
 
   // API DELETE Requests
-  app.delete("/api/notes/:id", function(req, res){
-    console.log("app.delete");
-    var x = req.params.id;
-    //console.log(x);
-    //console.log(req.params['id']);
-    //console.log(notesData.find(req.params['id'].title));
-    //console.log(notesData.splice(x => x.id === 'id'));
+  app.delete("/api/notes/:id", function(req, res) {
+    console.log(notesData);
+    console.log("this is the notesData ---> " + notesData);
+    var x = parseInt(req.params.id);
+    console.log("req.params.id is ---> " + x);
     var removeNote = notesData.map(function(item) {
-      return item.id;
+      return parseInt(item.id);
     }).indexOf(x);
+    console.log("removeNote is ---> " + removeNote);
     notesData.splice(removeNote, 1);
     res.end();
   })
