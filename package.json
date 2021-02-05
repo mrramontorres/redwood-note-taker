@@ -1,0 +1,23 @@
+{
+  "name": "redwood-note-taker",
+  "version": "1.0.0",
+  "description": "note taking for the next generation",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mrramontorres/redwood-note-taker.git"
+  },
+  "keywords": [
+    "node"
+  ],
+  "author": "ramon torres",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mrramontorres/redwood-note-taker/issues"
+  },
+  "homepage": "https://github.com/mrramontorres/redwood-note-taker#readme"
+}

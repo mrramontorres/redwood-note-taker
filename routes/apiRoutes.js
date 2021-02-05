@@ -14,7 +14,6 @@ module.exports = function(app) {
   // API GET Requests
   // Below code handles when users "visit" a page.
   // In each of the below cases when a user visits a link
-  // (ex: localhost:PORT/api/admin... they are shown a JSON of the data in the table)
   // ---------------------------------------------------------------------------
 
   app.get("/api/notes", function(req, res) {
@@ -25,13 +24,11 @@ module.exports = function(app) {
   // Below code handles when a user submits data to the server.
   // In each of the below cases, when a user submits form by clicking the save icon 
   // ...data (a JSON object) is pushed to the appropriate file
-  // (ex. User fills title... this data is then sent to the server...
-  // Then the server saves the data to the json file)
   // ---------------------------------------------------------------------------
 
   app.post("/api/notes", function(req, res) {
     // Our "server" will respond to requests and push the new note with specific ID.
-    // It will do this by sending out the value "true" have a table
+    // It will do this by adding an ID to the new note and pushing it to the json file.
     // req.body is available since we're using the body parsing middleware
 
     var num = Math.round(Math.random()*1000);
@@ -40,7 +37,7 @@ module.exports = function(app) {
       notesData.push({id,...req.body});
       res.json(true);
     } else {
-      id = 0
+      id = 0;
       notesData.push({id,...req.body});
       res.json(false);
     }
@@ -48,15 +45,13 @@ module.exports = function(app) {
   })
 
   // API DELETE Requests
+  // Our "server" will respond to requests and delete a speific note with ID.
+  // It will do this by map() finding what index matches the object ID.
   app.delete("/api/notes/:id", function(req, res) {
-    console.log(notesData);
-    console.log("this is the notesData ---> " + notesData);
     var x = parseInt(req.params.id);
-    console.log("req.params.id is ---> " + x);
     var removeNote = notesData.map(function(item) {
       return parseInt(item.id);
     }).indexOf(x);
-    console.log("removeNote is ---> " + removeNote);
     notesData.splice(removeNote, 1);
     res.end();
   })
